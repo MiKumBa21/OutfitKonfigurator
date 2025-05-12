@@ -1,6 +1,8 @@
 package View;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -124,15 +126,44 @@ public class View {
 
 
 
+
     }
 
     public TableView makeTable() {
         TableView table = new TableView();
+        table.setPrefWidth(800);
+        table.setPrefHeight(500);
 
         TableColumn column1 = new TableColumn("");
+        column1.setPrefWidth(800);
+        table.getColumns().add(column1);
+
+        // Header-Hintergrund und Header-Text einfärben
+        table.skinProperty().addListener((obs, oldSkin, newSkin) -> {
+            Platform.runLater(() -> {
+                // Header-Hintergrund weiß machen
+                Node headerBackground = table.lookup(".column-header-background");
+                if (headerBackground != null) {
+                    headerBackground.setStyle("-fx-background-color: white;");
+                }
+
+                // Header-Zellen weiß hinterlegen (optional, für Sicherheit)
+                Node headerRow = table.lookup(".column-header");
+                if (headerRow != null) {
+                    headerRow.setStyle("-fx-background-color: white;");
+                }
+
+                // Header-Text schwarz (optional anpassbar)
+                Node label = table.lookup(".column-header .label");
+                if (label != null) {
+                    label.setStyle("-fx-text-fill: black;");
+                }
+            });
+        });
 
         return table;
     }
+
 
     public void configScene() {
         configGrid.getChildren().clear();
