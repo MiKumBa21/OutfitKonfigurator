@@ -18,7 +18,7 @@ public class Datenbank {
 
     public Datenbank() {
         pieces = new ArrayList<Pieces>();
-        piecesFile = new File("C:/Users/matth/Documents/Schule/2024.25/SEW/UE26/Outfit Konfigurator/pieces/pieces.json");
+        piecesFile = new File("./pieces/pieces.json");
     }
 
     public void itemsSpeichern() {

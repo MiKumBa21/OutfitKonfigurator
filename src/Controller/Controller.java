@@ -19,7 +19,6 @@ public class Controller {
 
         loadBar();
 
-
         view.getInventoryButton().setOnAction(event -> {
             view.inventoryScene();
         });
