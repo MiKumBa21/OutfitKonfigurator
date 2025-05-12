@@ -146,7 +146,6 @@ public class View {
 
         hbox.getChildren().add(inventoryButton);
         hbox.getChildren().add(configButton);
-        System.out.println("Penis Petraa");
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(100);
         return hbox;
