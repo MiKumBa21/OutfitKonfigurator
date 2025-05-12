@@ -20,6 +20,7 @@ public class Main extends Application {
         view = new View();
         view.start(primaryStage);
         controller = new Controller(view);
+        System.out.println("Penis Petra");
         primaryStage.show();
 
     }
