@@ -123,10 +123,16 @@ public class View {
 
         inventoryGrid.add(makeTable(), 0, 0);
 
+        Button addButton = new Button("Hinzufügen");
+        Button delButton = new Button("Löschen");
 
 
 
 
+        root.setBottom(addButton);
+        root.setBottom(delButton);
+
+        root.getChildren().addAll(addButton, delButton);
     }
 
     public TableView makeTable() {
