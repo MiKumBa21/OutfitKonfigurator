@@ -67,7 +67,7 @@ public class View {
         stage = primaryStage;
 
         stage.setTitle("Outfit-Konfigurator");
-        stage.getIcons().add(new Image("file:///C:/Users/matth/Documents/Schule/2024.25/SEW/UE26/Outfit%20Konfigurator/images/icon.png"));
+        stage.getIcons().add(new Image("file:./images/icon.png"));
         startScene();
         stage.setScene(mainScene);
         stage.setResizable(false);
