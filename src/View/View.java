@@ -143,6 +143,8 @@ public class View {
 
 
 
+
+
         table.getColumns().add(column1);
         table.getColumns().add(column2);
         table.getColumns().add(column3);
