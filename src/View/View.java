@@ -142,18 +142,12 @@ public class View {
         column6.setMinWidth(108.33333333333333333333333333333);
 
 
-
-
-
         table.getColumns().add(column1);
         table.getColumns().add(column2);
         table.getColumns().add(column3);
         table.getColumns().add(column4);
         table.getColumns().add(column5);
         table.getColumns().add(column6);
-
-
-
 
 
         return table;
