@@ -19,7 +19,7 @@ public class View {
     private ProgressBar pbar = new ProgressBar();
 
     private BorderPane root = new BorderPane();
-    private Scene mainScene = new Scene(root, 1000, 800);
+    private Scene mainScene = new Scene(root, 700, 600);
 
     private GridPane startGrid = new GridPane();
 
@@ -125,32 +125,36 @@ public class View {
 
     public TableView makeTable() {
         TableView table = new TableView();
-        table.setPrefWidth(800);
-        table.setPrefHeight(500);
+        table.setPrefWidth(650);
+        table.setPrefHeight(400);
 
-        TableColumn column1 = new TableColumn("");
-        column1.setPrefWidth(800); // volle Breite
+        TableColumn column1 = new TableColumn("Bild");
+        column1.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column2 = new TableColumn("Name");
+        column2.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column3 = new TableColumn("Farbe");
+        column3.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column4 = new TableColumn("Stil");
+        column4.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column5 = new TableColumn("Jahreszeit");
+        column5.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column6 = new TableColumn("Wetter");
+        column6.setMinWidth(108.33333333333333333333333333333);
+
+
+
+
+
         table.getColumns().add(column1);
+        table.getColumns().add(column2);
+        table.getColumns().add(column3);
+        table.getColumns().add(column4);
+        table.getColumns().add(column5);
+        table.getColumns().add(column6);
 
-        // Header-Styling
-        table.skinProperty().addListener((obs, oldSkin, newSkin) -> {
-            Platform.runLater(() -> {
-                Node headerBackground = table.lookup(".column-header-background");
-                if (headerBackground != null) {
-                    headerBackground.setStyle("-fx-background-color: white;");
-                }
 
-                Node headerRow = table.lookup(".column-header");
-                if (headerRow != null) {
-                    headerRow.setStyle("-fx-background-color: white;");
-                }
 
-                Node label = table.lookup(".column-header .label");
-                if (label != null) {
-                    label.setStyle("-fx-text-fill: black;");
-                }
-            });
-        });
+
 
         return table;
     }
