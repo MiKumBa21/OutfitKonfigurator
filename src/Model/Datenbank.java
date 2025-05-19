@@ -31,7 +31,7 @@ public class Datenbank {
     }
 
     public void itemsLaden() {
-        if(piecesFile.length() > 0) {
+        if (piecesFile.exists() && piecesFile.length() > 0) {
             try (FileReader reader = new FileReader(piecesFile)) {
                 Type piecesListeTyp = new TypeToken<ArrayList<Pieces>>() {
                 }.getType();
@@ -59,5 +59,4 @@ public class Datenbank {
     public ArrayList<Pieces> getPieces() {
         return pieces;
     }
-
 }

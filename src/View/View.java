@@ -1,8 +1,11 @@
 package View;
 
+import Model.Pieces;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -13,6 +16,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.util.ArrayList;
 
 public class View {
 
@@ -32,6 +37,8 @@ public class View {
     private MenuBar menuBar = new MenuBar();
 
     private GridPane inventoryGrid = new GridPane();
+
+    private TableView<Pieces> inventoryTable = makeTable();
 
     private Button addButton = new Button("Hinzufügen");
     private Button delButton = new Button("Löschen");
@@ -54,7 +61,7 @@ public class View {
 
     private Stage addStage = new Stage();
     private GridPane addGrid = new GridPane();
-    private Scene addScene = new Scene(addGrid,500,500);
+    private Scene addScene = new Scene(addGrid, 500, 500);
     private TextField nameField = new TextField();
     private TextField colorField = new TextField();
     private TextField styleField = new TextField();
@@ -63,7 +70,7 @@ public class View {
     private CheckBox springCheckBox = new CheckBox("Frühling");
     private CheckBox summerCheckBox = new CheckBox("Sommer");
     private CheckBox autumnCheckBox = new CheckBox("Herbst");
-    private ChoiceBox typeChoice = new ChoiceBox();
+    private ChoiceBox<String> typeChoice = new ChoiceBox<>();
     private HBox weatherBox = new HBox();
     private CheckBox sunnyCheckBox = new CheckBox("Sonnig");
     private CheckBox rainCheckBox = new CheckBox("Regen");
@@ -71,7 +78,7 @@ public class View {
     private CheckBox windyCheckBox = new CheckBox("Windig");
     private Button imageButton = new Button("Bild hinzufügen");
     private Button saveButton = new Button("Speichern");
-    private  Button backButton = new Button("Zurück");
+    private Button backButton = new Button("Zurück");
 
 
     private GridPane configGrid = new GridPane();
@@ -118,13 +125,14 @@ public class View {
         inventoryGrid.add(titel, 0, 0);
 
         HBox topMenu = new HBox(menuBar);
+
         inventoryGrid.setAlignment(Pos.CENTER);
-
-        root.setTop(menuBar());
         root.setCenter(inventoryGrid);
+        root.setTop(menuBar());
 
-        TableView table = makeTable();
-        inventoryGrid.add(table, 0, 0);
+
+        inventoryGrid.add(inventoryTable, 0, 0);
+
 
         // Buttons unter der Tabelle rechts
         HBox buttonBox = new HBox(10); // spacing
@@ -137,8 +145,7 @@ public class View {
         root.setBottom(bottomPane);
     }
 
-    public void addScrene(){
-        addGrid.getChildren().clear();
+    public void addScrene() {
 
         addStage.setTitle("Kleidungsstück hinzufügen");
         addGrid.setAlignment(Pos.CENTER);
@@ -171,7 +178,7 @@ public class View {
         inputGrid.add(styleField, 2, 4);
 
         Label typeLabel = new Label("Type: ");
-        typeChoice.getItems().addAll("Schuhe","Unterteil", "Oberteil","Kopfbedekung","Accessories");
+        typeChoice.getItems().addAll("Schuhe", "Unterteil", "Oberteil", "Kopfbedekung", "Accessories");
         inputGrid.add(typeLabel, 0, 6);
         inputGrid.add(typeChoice, 2, 6);
 
@@ -187,7 +194,7 @@ public class View {
         weatherBox.setSpacing(5);
         inputGrid.add(weatherBox, 2, 12);
 
-        inputGrid.add(imageButton, 0, 16,3,1);
+        inputGrid.add(imageButton, 0, 16, 3, 1);
         imageButton.setAlignment(Pos.CENTER);
         imageButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
@@ -205,33 +212,50 @@ public class View {
         addStage.show();
     }
 
-    public TableView makeTable() {
-        TableView table = new TableView();
-        table.setPrefWidth(650);
-        table.setPrefHeight(400);
+    public TableView<Pieces> makeTable() {
+        TableView<Pieces> table = new TableView<>();
+        table.setPrefWidth(900);
+        table.setPrefHeight(600);
 
-        TableColumn column1 = new TableColumn("Bild");
-        column1.setMinWidth(108.33333333333333333333333333333);
-        TableColumn column2 = new TableColumn("Name");
-        column2.setMinWidth(108.33333333333333333333333333333);
-        TableColumn column3 = new TableColumn("Farbe");
-        column3.setMinWidth(108.33333333333333333333333333333);
-        TableColumn column4 = new TableColumn("Stil");
-        column4.setMinWidth(108.33333333333333333333333333333);
-        TableColumn column5 = new TableColumn("Jahreszeit");
-        column5.setMinWidth(108.33333333333333333333333333333);
-        TableColumn column6 = new TableColumn("Wetter");
-        column6.setMinWidth(108.33333333333333333333333333333);
+        TableColumn<Pieces, Image> column1 = new TableColumn<>("Bild");
+        column1.setCellValueFactory(new PropertyValueFactory<>("image"));
+        column1.setMinWidth(150);
 
+        TableColumn<Pieces, String> column2 = new TableColumn<>("Name");
+        column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+        column2.setMinWidth(150);
 
-        table.getColumns().add(column1);
-        table.getColumns().add(column2);
-        table.getColumns().add(column3);
-        table.getColumns().add(column4);
-        table.getColumns().add(column5);
-        table.getColumns().add(column6);
+        TableColumn<Pieces, String> column3 = new TableColumn<>("Farbe");
+        column3.setCellValueFactory(new PropertyValueFactory<>("color"));
+        column3.setMinWidth(150);
 
 
+
+        TableColumn<Pieces, String> column4 = new TableColumn<>("Stil");
+        column4.setCellValueFactory(new PropertyValueFactory<>("style"));
+        column4.setMinWidth(150);
+
+        TableColumn<Pieces, String> column5 = new TableColumn<>("Type");
+        column5.setCellValueFactory(new PropertyValueFactory<>("type"));
+        column5.setMinWidth(150);
+
+        TableColumn<Pieces, String> column6 = new TableColumn<>("Jahreszeit");
+        column6.setCellValueFactory(data -> {
+            ArrayList<String> list = data.getValue().getSeason();
+            String joined = String.join(", ", list);
+            return new ReadOnlyStringWrapper(joined);
+        });
+        column6.setMinWidth(150);
+
+        TableColumn<Pieces, String> column7 = new TableColumn<>("Wetter");
+        column7.setCellValueFactory(data -> {
+            ArrayList<String> list = data.getValue().getWeather();
+            String joined = String.join(", ", list);
+            return new ReadOnlyStringWrapper(joined);
+        });
+        column7.setMinWidth(150);
+
+        table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7);
 
         return table;
     }
@@ -344,5 +368,9 @@ public class View {
 
     public TextField getNameField() {
         return nameField;
+    }
+
+    public TableView getInventoryTable() {
+        return inventoryTable;
     }
 }

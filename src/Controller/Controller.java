@@ -2,6 +2,10 @@ package Controller;
 
 import View.*;
 import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
 
 
 public class Controller {
@@ -18,6 +22,11 @@ public class Controller {
         startDatenbank();
 
         loadBar();
+
+//        test();
+
+        loadTable();
+
 
         view.getInventoryButton().setOnAction(event -> {
             view.inventoryScene();
@@ -37,6 +46,20 @@ public class Controller {
 
         view.getBackButton().setOnAction(event -> {
             view.getAddStage().close();
+        });
+
+        view.getSaveButton().setOnAction(event -> {
+            saveNewPiece();
+            view.getAddStage().close();
+            loadTable();
+        });
+
+        view.getDelButton().setOnAction(event -> {
+            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                view.getInventoryTable().getItems().remove(selectedItem);
+                datenbank.getPieces().remove(selectedItem);
+            }
         });
 
     }
@@ -81,11 +104,55 @@ public class Controller {
     }
 
     public void test() {
-        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware","T-Shirt","Sonnig", "Sommer", "www.beispiel.at"));
+        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware", "T-Shirt", new ArrayList<String>(), new ArrayList<String>(), "file:./images/icon.png"));
 
         for (int i = 0; i < datenbank.getPieces().size(); i++) {
             System.out.println(datenbank.getPieces().get(i).toString());
         }
     }
 
+    public void loadTable() {
+        ObservableList<Pieces> observableList = FXCollections.observableArrayList(datenbank.getPieces());
+        view.getInventoryTable().setItems(observableList);
+    }
+
+    public void saveNewPiece() {
+        String name = view.getNameField().getText();
+        String color = view.getColorField().getText();
+        String style = view.getStyleField().getText();
+        String type = view.getTypeChoice().getValue().toString();
+        ArrayList<String> weather = new ArrayList<>();
+        ArrayList<String> season = new ArrayList<>();
+        String imageSource = "";
+
+        if (view.getSunnyCheckBox().isSelected()) {
+            weather.add("Sonnig");
+        }
+        if (view.getRainCheckBox().isSelected()) {
+            weather.add("Regen");
+        }
+        if (view.getSnowyCheckBox().isSelected()) {
+            weather.add("Schnee");
+        }
+        if (view.getWindyCheckBox().isSelected()) {
+            weather.add("Windig");
+        }
+
+        if (view.getWindyCheckBox().isSelected()) {
+            season.add("Winter");
+        }
+        if (view.getSpringCheckBox().isSelected()) {
+            season.add("Frühling");
+        }
+        if (view.getSummerCheckBox().isSelected()) {
+            season.add("Sommer");
+        }
+        if (view.getAutumnCheckBox().isSelected()) {
+            season.add("Herbst");
+        }
+
+        Pieces piece = new Pieces(name, color, style, type, weather, season, imageSource);
+
+        datenbank.addItem(piece);
+    }
 }
