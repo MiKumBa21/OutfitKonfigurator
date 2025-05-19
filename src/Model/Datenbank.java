@@ -33,9 +33,9 @@ public class Datenbank {
     public void itemsLaden() {
         if(piecesFile.length() > 0) {
             try (FileReader reader = new FileReader(piecesFile)) {
-                Type itemListeTyp = new TypeToken<ArrayList<Pieces>>() {
+                Type piecesListeTyp = new TypeToken<ArrayList<Pieces>>() {
                 }.getType();
-                pieces = gson.fromJson(reader, itemListeTyp);
+                pieces = gson.fromJson(reader, piecesListeTyp);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -56,7 +56,8 @@ public class Datenbank {
         }
     }
 
-    public ArrayList<Pieces> getItems() {
+    public ArrayList<Pieces> getPieces() {
         return pieces;
     }
+
 }
