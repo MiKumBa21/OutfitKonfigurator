@@ -231,7 +231,6 @@ public class View {
         table.getColumns().add(column5);
         table.getColumns().add(column6);
 
-        TableColumn column1 = new TableColumn("");
 
 
         return table;
