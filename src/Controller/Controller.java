@@ -19,7 +19,6 @@ public class Controller {
 
         loadBar();
 
-
         view.getInventoryButton().setOnAction(event -> {
             view.inventoryScene();
         });
@@ -30,6 +29,14 @@ public class Controller {
 
         view.getStage().setOnCloseRequest(event -> {
             datenbank.itemsSpeichern();
+        });
+
+        view.getAddButton().setOnAction(event -> {
+            view.addScrene();
+        });
+
+        view.getBackButton().setOnAction(event -> {
+            view.getAddStage().close();
         });
 
     }
@@ -74,10 +81,10 @@ public class Controller {
     }
 
     public void test() {
-        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware", "Sommer", "www.beispiel.at"));
+        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware","T-Shirt","Sonnig", "Sommer", "www.beispiel.at"));
 
-        for (int i = 0; i < datenbank.getItems().size(); i++) {
-            System.out.println(datenbank.getItems().get(i).toString());
+        for (int i = 0; i < datenbank.getPieces().size(); i++) {
+            System.out.println(datenbank.getPieces().get(i).toString());
         }
     }
 

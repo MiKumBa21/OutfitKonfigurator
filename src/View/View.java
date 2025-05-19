@@ -1,25 +1,28 @@
 package View;
 
-import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class View {
 
     private Stage stage = new Stage();
 
+
     private ProgressBar pbar = new ProgressBar();
 
     private BorderPane root = new BorderPane();
-    private Scene mainScene = new Scene(root, 700, 600);
+    private Scene mainScene = new Scene(root, 1000, 800);
 
     private GridPane startGrid = new GridPane();
 
@@ -30,36 +33,46 @@ public class View {
 
     private GridPane inventoryGrid = new GridPane();
 
-    private Menu seasonsMenu = new Menu("Jahreszeit");
-    private MenuItem winterItem = new MenuItem("Winter");
-    private MenuItem springItem = new MenuItem("Frühling");
-    private MenuItem summerItem = new MenuItem("Sommer");
-    private MenuItem autumnItem = new MenuItem("Herbst");
+    private Button addButton = new Button("Hinzufügen");
+    private Button delButton = new Button("Löschen");
 
-    private Menu weatherMenu = new Menu("Wetter");
-    private MenuItem rainItem = new MenuItem("Regen");
-    private MenuItem snowItem = new MenuItem("Schnee");
-    private MenuItem sunnyItem = new MenuItem("Sonnig");
-    private MenuItem cloudyItem = new MenuItem("Bewölkt");
+//    private Menu stylesMenu = new Menu("Stil");
+//    private MenuItem streetwearItem = new MenuItem("Streetwear");
+//    private MenuItem oldMoneyItem = new MenuItem("Old-Money");
+//    private MenuItem y2kItem = new MenuItem("Y2K");
+//    private MenuItem grungeItem = new MenuItem("Grunge");
+//    private MenuItem vintageItem = new MenuItem("Vintage");
+//    private MenuItem gothicItem = new MenuItem("Gothic");
+//    private MenuItem downTownItem = new MenuItem("Down Town Style");
+//    private MenuItem indieItem = new MenuItem("Indie");
+//    private MenuItem altItem = new MenuItem("Alt");
+//    private MenuItem TalahoonItem = new MenuItem("Talahoon");
+//    private MenuItem MetalheadItem = new MenuItem("Metal Head");
+//    private MenuItem HippieItem = new MenuItem("Hippie");
+//    private MenuItem CottagecoreItem = new MenuItem("Cottagecore");
+//    private MenuItem CasualItem = new MenuItem("Casual");
 
-    private Menu stylesMenu = new Menu("Stil");
-    private MenuItem streetwearItem = new MenuItem("Streetwear");
-    private MenuItem oldMoneyItem = new MenuItem("Old-Money");
-    private MenuItem y2kItem = new MenuItem("Y2K");
-    private MenuItem grungeItem = new MenuItem("Grunge");
-    private MenuItem vintageItem = new MenuItem("Vintage");
-    private MenuItem gothicItem = new MenuItem("Gothic");
-    private MenuItem downTownItem = new MenuItem("Down Town Style");
-    private MenuItem indieItem = new MenuItem("Indie");
-    private MenuItem altItem = new MenuItem("Alt");
-    private MenuItem TalahoonItem = new MenuItem("Talahoon");
-    private MenuItem MetalheadItem = new MenuItem("Metal Head");
-    private MenuItem HippieItem = new MenuItem("Hippie");
-    private MenuItem CottagecoreItem = new MenuItem("Cottagecore");
-    private MenuItem CasualItem = new MenuItem("Casual");
+    private Stage addStage = new Stage();
+    private GridPane addGrid = new GridPane();
+    private Scene addScene = new Scene(addGrid,500,500);
+    private TextField nameField = new TextField();
+    private TextField colorField = new TextField();
+    private TextField styleField = new TextField();
+    private HBox seasonsBox = new HBox();
+    private CheckBox winterCheckBox = new CheckBox("Winter");
+    private CheckBox springCheckBox = new CheckBox("Frühling");
+    private CheckBox summerCheckBox = new CheckBox("Sommer");
+    private CheckBox autumnCheckBox = new CheckBox("Herbst");
+    private ChoiceBox typeChoice = new ChoiceBox();
+    private HBox weatherBox = new HBox();
+    private CheckBox sunnyCheckBox = new CheckBox("Sonnig");
+    private CheckBox rainCheckBox = new CheckBox("Regen");
+    private CheckBox snowyCheckBox = new CheckBox("Schnee");
+    private CheckBox windyCheckBox = new CheckBox("Windig");
+    private Button imageButton = new Button("Bild hinzufügen");
+    private Button saveButton = new Button("Speichern");
+    private  Button backButton = new Button("Zurück");
 
-    Button addButton = new Button("Hinzufügen");
-    Button delButton = new Button("Löschen");
 
     private GridPane configGrid = new GridPane();
 
@@ -67,12 +80,13 @@ public class View {
         stage = primaryStage;
 
         stage.setTitle("Outfit-Konfigurator");
-        stage.getIcons().add(new Image("file:///C:/Users/matth/Documents/Schule/2024.25/SEW/UE26/Outfit%20Konfigurator/images/icon.png"));
+        stage.getIcons().add(new Image("file:./images/icon.png"));
         startScene();
         stage.setScene(mainScene);
         stage.setResizable(false);
         stage.show();
     }
+
 
     public void startScene() {
 
@@ -88,20 +102,20 @@ public class View {
         startGrid.add(pbar, 0, 1);
 
         startGrid.setAlignment(Pos.CENTER);
+        //root.setTop(menuBar());
         root.setCenter(startGrid);
+
+
     }
 
     public void inventoryScene() {
         inventoryGrid.getChildren().clear();
-        seasonsMenu.getItems().clear();
+        seasonsBox.getChildren().clear();
 
         Label titel = new Label("Inventar");
         titel.setTextAlignment(TextAlignment.CENTER);
         titel.setFont(Font.font("Calibri-Light", FontWeight.BOLD, 25));
         inventoryGrid.add(titel, 0, 0);
-
-        seasonsMenu.getItems().addAll(winterItem, springItem, summerItem, autumnItem);
-        menuBar.getMenus().addAll(seasonsMenu);
 
         HBox topMenu = new HBox(menuBar);
         inventoryGrid.setAlignment(Pos.CENTER);
@@ -121,6 +135,74 @@ public class View {
         BorderPane bottomPane = new BorderPane();
         bottomPane.setRight(buttonBox);
         root.setBottom(bottomPane);
+    }
+
+    public void addScrene(){
+        addGrid.getChildren().clear();
+
+        addStage.setTitle("Kleidungsstück hinzufügen");
+        addGrid.setAlignment(Pos.CENTER);
+        addGrid.setHgap(10);
+        addGrid.setVgap(10);
+        addStage.getIcons().add(new Image("file:./images/icon.png"));
+
+        Label addLabel = new Label("Kleidungsstück hinzufügen");
+        addLabel.setTextAlignment(TextAlignment.CENTER);
+        addLabel.setAlignment(Pos.CENTER);
+        addLabel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        addLabel.setFont(Font.font("Calibri-Light", FontWeight.BOLD, 25));
+        addGrid.add(addLabel, 0, 0);
+
+        GridPane inputGrid = new GridPane();
+        inputGrid.setAlignment(Pos.CENTER);
+        inputGrid.setHgap(10);
+        inputGrid.setVgap(10);
+
+        Label nameLabel = new Label("Name: ");
+        inputGrid.add(nameLabel, 0, 0);
+        inputGrid.add(nameField, 2, 0);
+
+        Label colorLabel = new Label("Farbe: ");
+        inputGrid.add(colorLabel, 0, 2);
+        inputGrid.add(colorField, 2, 2);
+
+        Label styleLabel = new Label("Stil: ");
+        inputGrid.add(styleLabel, 0, 4);
+        inputGrid.add(styleField, 2, 4);
+
+        Label typeLabel = new Label("Type: ");
+        typeChoice.getItems().addAll("Schuhe","Unterteil", "Oberteil","Kopfbedekung","Accessories");
+        inputGrid.add(typeLabel, 0, 6);
+        inputGrid.add(typeChoice, 2, 6);
+
+        Label seasonLabel = new Label("Jahreszeit: ");
+        inputGrid.add(seasonLabel, 0, 10);
+        seasonsBox.getChildren().addAll(winterCheckBox, springCheckBox, summerCheckBox, autumnCheckBox);
+        seasonsBox.setSpacing(5);
+        inputGrid.add(seasonsBox, 2, 10);
+
+        Label weatherLabel = new Label("Wetter: ");
+        inputGrid.add(weatherLabel, 0, 12);
+        weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
+        weatherBox.setSpacing(5);
+        inputGrid.add(weatherBox, 2, 12);
+
+        inputGrid.add(imageButton, 0, 16,3,1);
+        imageButton.setAlignment(Pos.CENTER);
+        imageButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        addGrid.add(inputGrid, 0, 3);
+
+        HBox buttonBox2 = new HBox();
+        buttonBox2.setAlignment(Pos.CENTER);
+        buttonBox2.setSpacing(10);
+        buttonBox2.getChildren().addAll(saveButton, backButton);
+
+        addGrid.add(buttonBox2, 0, 6);
+
+        addStage.setScene(addScene);
+        addStage.initOwner(stage);
+        addStage.show();
     }
 
     public TableView makeTable() {
@@ -149,18 +231,25 @@ public class View {
         table.getColumns().add(column5);
         table.getColumns().add(column6);
 
+        TableColumn column1 = new TableColumn("");
+
 
         return table;
     }
 
     public void configScene() {
         configGrid.getChildren().clear();
+
+        root.setBottom(null);
         root.setCenter(configGrid);
     }
 
     public HBox menuBar() {
+
         HBox hbox = new HBox();
-        hbox.getChildren().addAll(inventoryButton, configButton);
+
+        hbox.getChildren().add(inventoryButton);
+        hbox.getChildren().add(configButton);
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(100);
         return hbox;
@@ -180,5 +269,81 @@ public class View {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public Button getAddButton() {
+        return addButton;
+    }
+
+    public Button getDelButton() {
+        return delButton;
+    }
+
+    public Button getBackButton() {
+        return backButton;
+    }
+
+    public Stage getAddStage() {
+        return addStage;
+    }
+
+    public Button getSaveButton() {
+        return saveButton;
+    }
+
+    public Button getImageButton() {
+        return imageButton;
+    }
+
+    public CheckBox getWindyCheckBox() {
+        return windyCheckBox;
+    }
+
+    public CheckBox getSnowyCheckBox() {
+        return snowyCheckBox;
+    }
+
+    public CheckBox getRainCheckBox() {
+        return rainCheckBox;
+    }
+
+    public CheckBox getSunnyCheckBox() {
+        return sunnyCheckBox;
+    }
+
+    public HBox getWeatherBox() {
+        return weatherBox;
+    }
+
+    public ChoiceBox getTypeChoice() {
+        return typeChoice;
+    }
+
+    public CheckBox getAutumnCheckBox() {
+        return autumnCheckBox;
+    }
+
+    public CheckBox getSummerCheckBox() {
+        return summerCheckBox;
+    }
+
+    public CheckBox getSpringCheckBox() {
+        return springCheckBox;
+    }
+
+    public CheckBox getWinterCheckBox() {
+        return winterCheckBox;
+    }
+
+    public TextField getStyleField() {
+        return styleField;
+    }
+
+    public TextField getColorField() {
+        return colorField;
+    }
+
+    public TextField getNameField() {
+        return nameField;
     }
 }
