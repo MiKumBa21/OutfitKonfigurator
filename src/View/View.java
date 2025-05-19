@@ -207,8 +207,32 @@ public class View {
 
     public TableView makeTable() {
         TableView table = new TableView();
+        table.setPrefWidth(650);
+        table.setPrefHeight(400);
+
+        TableColumn column1 = new TableColumn("Bild");
+        column1.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column2 = new TableColumn("Name");
+        column2.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column3 = new TableColumn("Farbe");
+        column3.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column4 = new TableColumn("Stil");
+        column4.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column5 = new TableColumn("Jahreszeit");
+        column5.setMinWidth(108.33333333333333333333333333333);
+        TableColumn column6 = new TableColumn("Wetter");
+        column6.setMinWidth(108.33333333333333333333333333333);
+
+
+        table.getColumns().add(column1);
+        table.getColumns().add(column2);
+        table.getColumns().add(column3);
+        table.getColumns().add(column4);
+        table.getColumns().add(column5);
+        table.getColumns().add(column6);
 
         TableColumn column1 = new TableColumn("");
+
 
         return table;
     }
