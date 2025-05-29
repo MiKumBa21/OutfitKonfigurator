@@ -23,7 +23,6 @@ public class View {
 
     private Stage stage = new Stage();
 
-
     private ProgressBar pbar = new ProgressBar();
 
     private BorderPane root = new BorderPane();
@@ -92,6 +91,7 @@ public class View {
         stage.setScene(mainScene);
         stage.setResizable(false);
         stage.show();
+        addStage.initOwner(stage);
     }
 
 
@@ -145,7 +145,10 @@ public class View {
         root.setBottom(bottomPane);
     }
 
-    public void addScrene() {
+    public void addScene() {
+        addGrid.getChildren().clear();
+        seasonsBox.getChildren().clear();
+        weatherBox.getChildren().clear();
 
         addStage.setTitle("Kleidungsstück hinzufügen");
         addGrid.setAlignment(Pos.CENTER);
@@ -208,7 +211,6 @@ public class View {
         addGrid.add(buttonBox2, 0, 6);
 
         addStage.setScene(addScene);
-        addStage.initOwner(stage);
         addStage.show();
     }
 
@@ -228,7 +230,6 @@ public class View {
         TableColumn<Pieces, String> column3 = new TableColumn<>("Farbe");
         column3.setCellValueFactory(new PropertyValueFactory<>("color"));
         column3.setMinWidth(150);
-
 
 
         TableColumn<Pieces, String> column4 = new TableColumn<>("Stil");

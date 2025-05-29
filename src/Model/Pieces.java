@@ -28,7 +28,7 @@ public class Pieces {
 
     @Override
     public String toString() {
-        return "Name: " + getName() + ", Farbe: " + getColor() + ", Style: " + getStyle() +"" +"Wetter: " + printWeather()+ ", Jahreszeit: " + printSeason() + ", ImageSource: " + getImageSource();
+        return "Name: " + getName() + ", Farbe: " + getColor() + ", Style: " + getStyle() + "Wetter: " + printWeather() + ", Jahreszeit: " + printSeason() + ", ImageSource: " + getImageSource();
     }
 
     public String getName() {

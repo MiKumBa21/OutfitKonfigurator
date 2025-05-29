@@ -23,7 +23,7 @@ public class Datenbank {
 
     public void itemsSpeichern() {
         try (FileWriter writer = new FileWriter(piecesFile)) {
-            gson.toJson(pieces, writer);
+            writer.write(gson.toJson(pieces));
             System.out.println("Liste erfolgreich gespeichert.");
         } catch (IOException e) {
             e.printStackTrace();

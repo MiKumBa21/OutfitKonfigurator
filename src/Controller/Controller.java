@@ -41,7 +41,7 @@ public class Controller {
         });
 
         view.getAddButton().setOnAction(event -> {
-            view.addScrene();
+            view.addScene();
         });
 
         view.getBackButton().setOnAction(event -> {
