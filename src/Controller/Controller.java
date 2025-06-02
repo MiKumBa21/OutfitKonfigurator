@@ -4,6 +4,7 @@ import View.*;
 import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,7 @@ public class Controller {
 
         view.getAddButton().setOnAction(event -> {
             view.addScene();
+            clearFields();
         });
 
         view.getBackButton().setOnAction(event -> {
@@ -52,6 +54,9 @@ public class Controller {
             saveNewPiece();
             view.getAddStage().close();
             loadTable();
+            if (view.getFileChooser().getSelectedFile() != null) {
+                System.out.println(view.getFileChooser().getSelectedFile().getAbsolutePath());
+            }
         });
 
         view.getDelButton().setOnAction(event -> {
@@ -60,6 +65,10 @@ public class Controller {
                 view.getInventoryTable().getItems().remove(selectedItem);
                 datenbank.getPieces().remove(selectedItem);
             }
+        });
+
+        view.getImageButton().setOnAction(event -> {
+            view.imageSelction();
         });
 
     }
@@ -120,10 +129,23 @@ public class Controller {
         String name = view.getNameField().getText();
         String color = view.getColorField().getText();
         String style = view.getStyleField().getText();
-        String type = view.getTypeChoice().getValue().toString();
+        String type;
+        if (view.getTypeChoice().getValue() != null) {
+            type = view.getTypeChoice().getValue().toString();
+        } else {
+            type = "";
+        }
+
+        String imageSource;
+
         ArrayList<String> weather = new ArrayList<>();
         ArrayList<String> season = new ArrayList<>();
-        String imageSource = "";
+        if (view.getFileChooser().getSelectedFile() != null) {
+            imageSource = view.getFileChooser().getSelectedFile().getAbsolutePath();
+        } else {
+            imageSource = "";
+        }
+
 
         if (view.getSunnyCheckBox().isSelected()) {
             weather.add("Sonnig");
@@ -154,5 +176,17 @@ public class Controller {
         Pieces piece = new Pieces(name, color, style, type, weather, season, imageSource);
 
         datenbank.addItem(piece);
+    }
+
+    public void clearFields(){
+        view.getNameField().clear();
+        view.getColorField().clear();
+        view.getStyleField().clear();
+        view.getSummerCheckBox().setSelected(false);
+        view.getSpringCheckBox().setSelected(false);
+        view.get
+        view.getRainCheckBox().setSelected(false);
+        view.getSunnyCheckBox().setSelected(false);
+        view.getWindyCheckBox().setSelected(false);
     }
 }
