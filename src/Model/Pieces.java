@@ -1,17 +1,21 @@
 package Model;
 
 
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+
 public class Pieces {
 
     private String name;
     private String color;
     private String style;
     private String type;
-    private String weather;
-    private String season;
+    private ArrayList<String> weather;
+    private ArrayList<String> season;
     private String imageSource;
 
-    public Pieces(String name, String color, String style, String type, String weather, String season, String imageSource) {
+    public Pieces(String name, String color, String style, String type, ArrayList<String> weather, ArrayList<String> season, String imageSource) {
         setName(name);
         setColor(color);
         setStyle(style);
@@ -23,7 +27,7 @@ public class Pieces {
 
     @Override
     public String toString() {
-        return "Name: " + getName() + ", Farbe: " + getColor() + ", Style: " + getStyle() + ", Jahreszeit: " + getSeason() + ", ImageSource: " + getImageSource();
+        return "Name: " + getName() + ", Farbe: " + getColor() + ", Style: " + getStyle() + "Wetter: " + printWeather() + ", Jahreszeit: " + printSeason() + ", ImageSource: " + getImageSource();
     }
 
     public String getName() {
@@ -50,11 +54,11 @@ public class Pieces {
         this.style = style;
     }
 
-    public String getSeason() {
+    public ArrayList<String> getSeason() {
         return season;
     }
 
-    public void setSeason(String season) {
+    public void setSeason(ArrayList<String> season) {
         this.season = season;
     }
 
@@ -74,11 +78,27 @@ public class Pieces {
         this.type = type;
     }
 
-    public String getWeather() {
+    public ArrayList<String> getWeather() {
         return weather;
     }
 
-    public void setWeather(String weather) {
+    public void setWeather(ArrayList<String> weather) {
         this.weather = weather;
+    }
+
+    public String printWeather() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < weather.size(); i++) {
+            sb.append(weather.get(i));
+        }
+        return sb.toString();
+    }
+
+    public String printSeason() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < season.size(); i++) {
+            sb.append(season.get(i));
+        }
+        return sb.toString();
     }
 }

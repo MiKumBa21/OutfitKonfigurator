@@ -2,6 +2,11 @@ package Controller;
 
 import View.*;
 import Model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 
 public class Controller {
@@ -19,6 +24,11 @@ public class Controller {
 
         loadBar();
 
+//        test();
+
+        loadTable();
+
+
         view.getInventoryButton().setOnAction(event -> {
             view.inventoryScene();
         });
@@ -32,11 +42,33 @@ public class Controller {
         });
 
         view.getAddButton().setOnAction(event -> {
-            view.addScrene();
+            view.addScene();
+            clearFields();
         });
 
         view.getBackButton().setOnAction(event -> {
             view.getAddStage().close();
+        });
+
+        view.getSaveButton().setOnAction(event -> {
+            saveNewPiece();
+            view.getAddStage().close();
+            loadTable();
+            if (view.getFileChooser().getSelectedFile() != null) {
+                System.out.println(view.getFileChooser().getSelectedFile().getAbsolutePath());
+            }
+        });
+
+        view.getDelButton().setOnAction(event -> {
+            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                view.getInventoryTable().getItems().remove(selectedItem);
+                datenbank.getPieces().remove(selectedItem);
+            }
+        });
+
+        view.getImageButton().setOnAction(event -> {
+            view.imageSelction();
         });
 
     }
@@ -81,11 +113,80 @@ public class Controller {
     }
 
     public void test() {
-        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware","T-Shirt","Sonnig", "Sommer", "www.beispiel.at"));
+        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware", "T-Shirt", new ArrayList<String>(), new ArrayList<String>(), "file:./images/icon.png"));
 
         for (int i = 0; i < datenbank.getPieces().size(); i++) {
             System.out.println(datenbank.getPieces().get(i).toString());
         }
     }
 
+    public void loadTable() {
+        ObservableList<Pieces> observableList = FXCollections.observableArrayList(datenbank.getPieces());
+        view.getInventoryTable().setItems(observableList);
+    }
+
+    public void saveNewPiece() {
+        String name = view.getNameField().getText();
+        String color = view.getColorField().getText();
+        String style = view.getStyleField().getText();
+        String type;
+        if (view.getTypeChoice().getValue() != null) {
+            type = view.getTypeChoice().getValue().toString();
+        } else {
+            type = "";
+        }
+
+        String imageSource;
+
+        ArrayList<String> weather = new ArrayList<>();
+        ArrayList<String> season = new ArrayList<>();
+        if (view.getFileChooser().getSelectedFile() != null) {
+            imageSource = view.getFileChooser().getSelectedFile().getAbsolutePath();
+        } else {
+            imageSource = "";
+        }
+
+
+        if (view.getSunnyCheckBox().isSelected()) {
+            weather.add("Sonnig");
+        }
+        if (view.getRainCheckBox().isSelected()) {
+            weather.add("Regen");
+        }
+        if (view.getSnowyCheckBox().isSelected()) {
+            weather.add("Schnee");
+        }
+        if (view.getWindyCheckBox().isSelected()) {
+            weather.add("Windig");
+        }
+
+        if (view.getWindyCheckBox().isSelected()) {
+            season.add("Winter");
+        }
+        if (view.getSpringCheckBox().isSelected()) {
+            season.add("Frühling");
+        }
+        if (view.getSummerCheckBox().isSelected()) {
+            season.add("Sommer");
+        }
+        if (view.getAutumnCheckBox().isSelected()) {
+            season.add("Herbst");
+        }
+
+        Pieces piece = new Pieces(name, color, style, type, weather, season, imageSource);
+
+        datenbank.addItem(piece);
+    }
+
+    public void clearFields(){
+        view.getNameField().clear();
+        view.getColorField().clear();
+        view.getStyleField().clear();
+        view.getSummerCheckBox().setSelected(false);
+        view.getSpringCheckBox().setSelected(false);
+        view.get
+        view.getRainCheckBox().setSelected(false);
+        view.getSunnyCheckBox().setSelected(false);
+        view.getWindyCheckBox().setSelected(false);
+    }
 }
