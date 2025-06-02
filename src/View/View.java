@@ -22,7 +22,7 @@ public class View {
     private ProgressBar pbar = new ProgressBar();
 
     private BorderPane root = new BorderPane();
-    private Scene mainScene = new Scene(root, 1000, 800);
+    private Scene mainScene = new Scene(root, 700, 500);
 
     private GridPane startGrid = new GridPane();
 
