@@ -5,6 +5,10 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -17,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class View {
@@ -41,6 +47,8 @@ public class View {
 
     private Button addButton = new Button("Hinzufügen");
     private Button delButton = new Button("Löschen");
+
+    private static JFileChooser fileChooser = new JFileChooser();
 
 //    private Menu stylesMenu = new Menu("Stil");
 //    private MenuItem streetwearItem = new MenuItem("Streetwear");
@@ -279,6 +287,25 @@ public class View {
         return hbox;
     }
 
+    public void imageSelction() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            fileChooser.setDialogTitle("Bild auswählen");
+            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+                    "Bilddateien", "jpg", "jpeg", "png", "bmp", "gif"));
+
+            JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            fileChooser.showOpenDialog(dialog);
+            dialog.dispose();
+        });
+    }
+
     public Button getInventoryButton() {
         return inventoryButton;
     }
@@ -374,4 +401,10 @@ public class View {
     public TableView getInventoryTable() {
         return inventoryTable;
     }
+
+    public JFileChooser getFileChooser() {
+        return fileChooser;
+    }
+
+
 }

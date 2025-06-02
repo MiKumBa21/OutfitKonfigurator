@@ -14,7 +14,6 @@ public class Pieces {
     private ArrayList<String> weather;
     private ArrayList<String> season;
     private String imageSource;
-    private Image image;
 
     public Pieces(String name, String color, String style, String type, ArrayList<String> weather, ArrayList<String> season, String imageSource) {
         setName(name);
