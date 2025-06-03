@@ -42,8 +42,8 @@ public class Controller {
         });
 
         view.getAddButton().setOnAction(event -> {
+            clearChoise();
             view.addScene();
-            clearFields();
         });
 
         view.getBackButton().setOnAction(event -> {
@@ -54,9 +54,6 @@ public class Controller {
             saveNewPiece();
             view.getAddStage().close();
             loadTable();
-            if (view.getFileChooser().getSelectedFile() != null) {
-                System.out.println(view.getFileChooser().getSelectedFile().getAbsolutePath());
-            }
         });
 
         view.getDelButton().setOnAction(event -> {
@@ -142,6 +139,7 @@ public class Controller {
         ArrayList<String> season = new ArrayList<>();
         if (view.getFileChooser().getSelectedFile() != null) {
             imageSource = view.getFileChooser().getSelectedFile().getAbsolutePath();
+            System.out.println(view.getFileChooser().getSelectedFile().getAbsolutePath());
         } else {
             imageSource = "";
         }
@@ -178,14 +176,18 @@ public class Controller {
         datenbank.addItem(piece);
     }
 
-    public void clearFields(){
+    public void clearChoise() {
         view.getNameField().clear();
         view.getColorField().clear();
         view.getStyleField().clear();
-        view.getSummerCheckBox().setSelected(false);
+        view.getTypeChoice().getItems().clear();
+        view.getWinterCheckBox().setSelected(false);
         view.getSpringCheckBox().setSelected(false);
+        view.getSummerCheckBox().setSelected(false);
+        view.getAutumnCheckBox().setSelected(false);
         view.getRainCheckBox().setSelected(false);
         view.getSunnyCheckBox().setSelected(false);
         view.getWindyCheckBox().setSelected(false);
+        view.getSnowyCheckBox().setSelected(false);
     }
 }
