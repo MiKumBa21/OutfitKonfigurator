@@ -189,5 +189,6 @@ public class Controller {
         view.getSunnyCheckBox().setSelected(false);
         view.getWindyCheckBox().setSelected(false);
         view.getSnowyCheckBox().setSelected(false);
+        view.getFileChooser().setSelectedFile(null);
     }
 }
