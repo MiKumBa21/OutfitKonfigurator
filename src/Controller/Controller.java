@@ -184,7 +184,6 @@ public class Controller {
         view.getStyleField().clear();
         view.getSummerCheckBox().setSelected(false);
         view.getSpringCheckBox().setSelected(false);
-        view.get
         view.getRainCheckBox().setSelected(false);
         view.getSunnyCheckBox().setSelected(false);
         view.getWindyCheckBox().setSelected(false);

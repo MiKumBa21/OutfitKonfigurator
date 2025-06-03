@@ -95,6 +95,10 @@ public class View {
 
         stage.setTitle("Outfit-Konfigurator");
         stage.getIcons().add(new Image("file:./images/icon.png"));
+
+        mainScene.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+
+
         startScene();
         stage.setScene(mainScene);
         stage.setResizable(false);
