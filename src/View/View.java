@@ -86,7 +86,6 @@ public class View {
         addStage.initOwner(stage);
     }
 
-
     public void startScene() {
 
         Label titel = new Label("Outfit Konfigurator");
@@ -212,7 +211,7 @@ public class View {
         table.setPrefHeight(600);
 
         TableColumn<Pieces, Image> column1 = new TableColumn<>("Bild");
-        column1.setCellValueFactory(new PropertyValueFactory<>("image"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("imageSource"));
         column1.setMinWidth(150);
 
         TableColumn<Pieces, String> column2 = new TableColumn<>("Name");
