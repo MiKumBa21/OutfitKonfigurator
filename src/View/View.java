@@ -32,7 +32,7 @@ public class View {
     private ProgressBar pbar = new ProgressBar();
 
     private BorderPane root = new BorderPane();
-    private Scene mainScene = new Scene(root, 1000, 800);
+    private Scene mainScene = new Scene(root, 700, 500);
 
     private GridPane startGrid = new GridPane();
 
@@ -79,6 +79,10 @@ public class View {
 
         stage.setTitle("Outfit-Konfigurator");
         stage.getIcons().add(new Image("file:./images/icon.png"));
+
+        mainScene.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+
+
         startScene();
         stage.setScene(mainScene);
         stage.setResizable(false);
