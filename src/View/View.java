@@ -50,22 +50,6 @@ public class View {
 
     private static JFileChooser fileChooser = new JFileChooser();
 
-//    private Menu stylesMenu = new Menu("Stil");
-//    private MenuItem streetwearItem = new MenuItem("Streetwear");
-//    private MenuItem oldMoneyItem = new MenuItem("Old-Money");
-//    private MenuItem y2kItem = new MenuItem("Y2K");
-//    private MenuItem grungeItem = new MenuItem("Grunge");
-//    private MenuItem vintageItem = new MenuItem("Vintage");
-//    private MenuItem gothicItem = new MenuItem("Gothic");
-//    private MenuItem downTownItem = new MenuItem("Down Town Style");
-//    private MenuItem indieItem = new MenuItem("Indie");
-//    private MenuItem altItem = new MenuItem("Alt");
-//    private MenuItem TalahoonItem = new MenuItem("Talahoon");
-//    private MenuItem MetalheadItem = new MenuItem("Metal Head");
-//    private MenuItem HippieItem = new MenuItem("Hippie");
-//    private MenuItem CottagecoreItem = new MenuItem("Cottagecore");
-//    private MenuItem CasualItem = new MenuItem("Casual");
-
     private Stage addStage = new Stage();
     private GridPane addGrid = new GridPane();
     private Scene addScene = new Scene(addGrid, 500, 500);
@@ -105,7 +89,6 @@ public class View {
         stage.show();
         addStage.initOwner(stage);
     }
-
 
     public void startScene() {
 
@@ -232,7 +215,7 @@ public class View {
         table.setPrefHeight(600);
 
         TableColumn<Pieces, Image> column1 = new TableColumn<>("Bild");
-        column1.setCellValueFactory(new PropertyValueFactory<>("image"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("imageSource"));
         column1.setMinWidth(150);
 
         TableColumn<Pieces, String> column2 = new TableColumn<>("Name");
@@ -270,6 +253,7 @@ public class View {
 
         table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7);
 
+        table.setPlaceholder(new Label("Keine Kleidungsstücke in deiner Liste"));
         return table;
     }
 
