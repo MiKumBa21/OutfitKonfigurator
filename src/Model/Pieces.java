@@ -1,7 +1,7 @@
 package Model;
 
-
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,13 @@ public class Pieces {
         setWeather(weather);
         setSeason(season);
         setImageSource(imageSource);
+    }
+
+    public ImageView getImageView() {
+        ImageView view = new ImageView(new Image("File:" + getImageSource()));
+        view.setFitWidth(150);
+        view.setPreserveRatio(true);
+     return view;
     }
 
     @Override
