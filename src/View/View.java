@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 public class View {
 
+
     private Stage stage = new Stage();
 
     private ProgressBar pbar = new ProgressBar();
@@ -145,6 +146,8 @@ public class View {
         seasonsBox.getChildren().clear();
         weatherBox.getChildren().clear();
 
+        addScene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         addStage.setTitle("Kleidungsstück hinzufügen");
         addGrid.setAlignment(Pos.CENTER);
         addGrid.setHgap(10);
@@ -152,6 +155,8 @@ public class View {
         addStage.getIcons().add(new Image("file:./images/icon.png"));
 
         Label addLabel = new Label("Kleidungsstück hinzufügen");
+        addLabel.setId("addSceneLabel");
+
         addLabel.setTextAlignment(TextAlignment.CENTER);
         addLabel.setAlignment(Pos.CENTER);
         addLabel.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);

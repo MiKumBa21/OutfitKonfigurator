@@ -1,6 +1,29 @@
-.root {
+.label {
     -fx-font-family: "Century Gothic";
 
+}
+
+.table-view {
+    -fx-font-family: "Century Gothic";
+}
+
+.button {
+    -fx-font-family: "Century Gothic";
+}
+
+
+#addSceneLabel {
+    -fx-font-family: "Century Gothic";
+
+}
+
+.label {
+    -fx-font-family: "Century Gothic";
+
+}
+
+.button {
+    -fx-font-family: "Century Gothic";
 }
 
 .table-view .scroll-bar {
