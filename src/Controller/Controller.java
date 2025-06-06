@@ -24,10 +24,7 @@ public class Controller {
 
         loadBar();
 
-//        test();
-
         loadTable();
-
 
         view.getInventoryButton().setOnAction(event -> {
             view.inventoryScene();
@@ -66,6 +63,11 @@ public class Controller {
 
         view.getImageButton().setOnAction(event -> {
             view.imageSelction();
+        });
+
+        //Das Bearbeiten der einzelnen Elemente
+        view.getInventoryTable().setOnMouseClicked(event -> {
+            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
         });
 
     }
@@ -109,17 +111,10 @@ public class Controller {
         datenbank.deleteFileContent();
     }
 
-    public void test() {
-        datenbank.addItem(new Pieces("Bären Shirt", "Schwarz", "Streetware", "T-Shirt", new ArrayList<String>(), new ArrayList<String>(), "file:./images/icon.png"));
-
-        for (int i = 0; i < datenbank.getPieces().size(); i++) {
-            System.out.println(datenbank.getPieces().get(i).toString());
-        }
-    }
-
     public void loadTable() {
         ObservableList<Pieces> observableList = FXCollections.observableArrayList(datenbank.getPieces());
         view.getInventoryTable().setItems(observableList);
+
     }
 
     public void saveNewPiece() {
@@ -189,5 +184,6 @@ public class Controller {
         view.getSunnyCheckBox().setSelected(false);
         view.getWindyCheckBox().setSelected(false);
         view.getSnowyCheckBox().setSelected(false);
+        view.getFileChooser().setSelectedFile(null);
     }
 }

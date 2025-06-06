@@ -25,3 +25,14 @@
 .button {
     -fx-font-family: "Century Gothic";
 }
+
+.table-view .scroll-bar {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+}
+
+.table-cell {
+    -fx-alignment: BASELINE_CENTER;
+
+}
