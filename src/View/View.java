@@ -105,13 +105,28 @@ public class View {
         startGrid.add(pbar, 0, 1);
 
         startGrid.setAlignment(Pos.CENTER);
-        //root.setTop(menuBar());
         root.setCenter(startGrid);
 
+        // Button-Events definieren
+        inventoryButton.setOnAction(e -> {
+            inventoryScene();
+            inventoryButton.getStyleClass().add("active");
+            configButton.getStyleClass().remove("active");
+        });
 
+        configButton.setOnAction(e -> {
+            configScene();
+            configButton.getStyleClass().add("active");
+            inventoryButton.getStyleClass().remove("active");
+        });
     }
 
     public void inventoryScene() {
+
+            inventoryButton.getStyleClass().add("active");
+            configButton.getStyleClass().remove("active");
+
+
         inventoryGrid.getChildren().clear();
         seasonsBox.getChildren().clear();
 
@@ -271,6 +286,8 @@ public class View {
     }
 
     public void configScene() {
+        configButton.getStyleClass().add("active");
+        inventoryButton.getStyleClass().remove("active");
         configGrid.getChildren().clear();
         seasonsBox.getChildren().clear();
         weatherBox.getChildren().clear();

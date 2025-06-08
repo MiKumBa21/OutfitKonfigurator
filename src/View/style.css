@@ -12,8 +12,7 @@
 }
 
 .button:hover {
-
-    -fx-background-color: #66bfff;
+    -fx-background-color: linear-gradient(to right, #66bfff, hotpink);
 }
 
 /* Textfelder */
@@ -36,3 +35,7 @@
 
 }
 
+.button.active {
+    -fx-background-color: hotpink;
+    -fx-text-fill: white;
+}
