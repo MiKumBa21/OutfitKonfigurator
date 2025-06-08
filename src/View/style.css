@@ -2,13 +2,42 @@
     -fx-font-family: "Century Gothic";
 }
 
-.table-view .scroll-bar {
-    -fx-opacity: 0;
-    -fx-max-width: 0;
-    -fx-max-height: 0;
+/*  Buttons  */
+.button {
+    -fx-background-color: #33aaff;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
 }
 
-.table-cell {
-    -fx-alignment: BASELINE_CENTER;
+/*Farbverlauf*/
+.button:hover {
+    -fx-background-color: linear-gradient(to right, #66bfff, hotpink);
+}
 
+/* Textfelder */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+}
+
+/* ChoiceBoxen */
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6;
+}
+
+
+.table-row-cell:selected:focused {
+    -fx-background-color: #66bfff;
+
+}
+
+
+.button.active {
+    -fx-background-color: hotpink;
+    -fx-text-fill: white;
 }
