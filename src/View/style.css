@@ -11,6 +11,7 @@
     -fx-border-color: transparent;
 }
 
+/*Farbverlauf*/
 .button:hover {
     -fx-background-color: linear-gradient(to right, #66bfff, hotpink);
 }

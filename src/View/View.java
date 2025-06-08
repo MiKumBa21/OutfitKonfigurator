@@ -470,6 +470,4 @@ public class View {
     public JFileChooser getFileChooser() {
         return fileChooser;
     }
-
-
 }
