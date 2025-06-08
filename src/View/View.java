@@ -37,7 +37,7 @@ public class View {
 
     private GridPane startGrid = new GridPane();
 
-    private Button inventoryButton = new Button("Inventory");
+    private Button inventoryButton = new Button("Inventar");
     private Button configButton = new Button("Konfigurator");
 
     private MenuBar menuBar = new MenuBar();
@@ -272,10 +272,59 @@ public class View {
 
     public void configScene() {
         configGrid.getChildren().clear();
+        seasonsBox.getChildren().clear();
+        weatherBox.getChildren().clear();
+        typeChoice.getItems().clear();
+
+        configGrid.setAlignment(Pos.TOP_CENTER);
+        configGrid.setHgap(20);
+        configGrid.setVgap(20);
+        configGrid.setStyle("-fx-padding: 40;");
+
+        Label configLabel = new Label("Outfit-Konfigurator");
+        configLabel.setFont(Font.font("Calibri-Light", FontWeight.BOLD, 30));
+        configGrid.add(configLabel, 0, 0, 2, 1);
+
+
+        Label styleLabel = new Label("Style:");
+        nameField.setPrefWidth(200);
+        configGrid.add(styleLabel, 0, 1);
+        configGrid.add(styleField, 1, 1);
+
+        Label colorLabel = new Label("Farbe:");
+        nameField.setPrefWidth(200);
+        configGrid.add(colorLabel, 0, 2);
+        configGrid.add(colorField, 1, 2);
+
+
+        Label seasonLabel = new Label("Jahreszeit:");
+        seasonsBox.getChildren().addAll(winterCheckBox, springCheckBox, summerCheckBox, autumnCheckBox);
+        seasonsBox.setSpacing(15);
+        configGrid.add(seasonLabel, 0, 3);
+        configGrid.add(seasonsBox, 1, 3);
+
+
+        Label weatherLabel = new Label("Wetter:");
+        weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
+        weatherBox.setSpacing(15);
+        configGrid.add(weatherLabel, 0, 4);
+        configGrid.add(weatherBox, 1, 4);
+
+
+        Button applyButton = new Button("Anwenden");
+        Button resetButton = new Button("Zurücksetzen");
+        applyButton.setPrefWidth(100);
+        resetButton.setPrefWidth(100);
+
+        HBox buttonBox = new HBox(20);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.getChildren().addAll(applyButton, resetButton);
+        configGrid.add(buttonBox, 0, 5, 2, 1);
 
         root.setBottom(null);
         root.setCenter(configGrid);
     }
+
 
     public HBox menuBar() {
 
