@@ -303,13 +303,11 @@ public class View {
         configGrid.add(seasonLabel, 0, 3);
         configGrid.add(seasonsBox, 1, 3);
 
-
         Label weatherLabel = new Label("Wetter:");
         weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
         weatherBox.setSpacing(15);
         configGrid.add(weatherLabel, 0, 4);
         configGrid.add(weatherBox, 1, 4);
-
 
         Button applyButton = new Button("Anwenden");
         Button resetButton = new Button("Zurücksetzen");
