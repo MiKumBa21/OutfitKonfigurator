@@ -21,6 +21,7 @@ public class Controller {
         this.model = new Model();
         this.datenbank = new Datenbank();
 
+
         //Für Alertbox
         stage.setOnCloseRequest(e1 -> {
             e1.consume();

@@ -20,6 +20,7 @@ public class Main extends Application {
         view = new View();
         controller = new Controller(view,primaryStage);
 
+
         view.start(primaryStage);
         primaryStage.show();
 

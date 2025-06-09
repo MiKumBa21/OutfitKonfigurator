@@ -92,6 +92,7 @@ public class View {
         addStage.initOwner(stage);
     }
 
+
     //Alertbox
     public void closeAlert(Stage stage){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
