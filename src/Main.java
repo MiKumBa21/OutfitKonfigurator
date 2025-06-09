@@ -18,9 +18,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         view = new View();
-        view.start(primaryStage);
-        controller = new Controller(view);
+        controller = new Controller(view,primaryStage);
 
+        view.start(primaryStage);
         primaryStage.show();
 
     }

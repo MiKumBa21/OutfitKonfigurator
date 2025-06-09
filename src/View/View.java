@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class View {
 
@@ -89,6 +90,17 @@ public class View {
         stage.setResizable(false);
         stage.show();
         addStage.initOwner(stage);
+    }
+
+    //Alertbox
+    public void closeAlert(Stage stage){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Möchtest du wirklich das Programm schließen");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK){
+            stage.close();
+        }
     }
 
     public void startScene() {

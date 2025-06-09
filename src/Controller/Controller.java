@@ -5,6 +5,7 @@ import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -15,10 +16,17 @@ public class Controller {
     private View view;
     private Datenbank datenbank;
 
-    public Controller(View view) {
+    public Controller(View view, Stage stage) {
         this.view = view;
         this.model = new Model();
         this.datenbank = new Datenbank();
+
+        //Für Alertbox
+        stage.setOnCloseRequest(e1 -> {
+            e1.consume();
+            view.closeAlert(stage);
+        });
+
 
         startDatenbank();
 
