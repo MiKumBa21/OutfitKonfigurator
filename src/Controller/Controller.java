@@ -31,9 +31,10 @@ public class Controller {
         this.model = new Model();
         this.datenbank = new Datenbank();
 
-        //Für Alertbox
-        stage.setOnCloseRequest(e1 -> {
-            e1.consume();
+        //Für Alertbox und speichern von Daten
+        stage.setOnCloseRequest(event -> {
+            datenbank.itemsSpeichern();
+            event.consume();
             view.closeAlert(stage);
         });
 
@@ -47,10 +48,6 @@ public class Controller {
 
         view.getConfigButton().setOnAction(event -> {
             view.configScene();
-        });
-
-        view.getStage().setOnCloseRequest(event -> {
-            datenbank.itemsSpeichern();
         });
 
         view.getAddButton().setOnAction(event -> {
