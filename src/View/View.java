@@ -80,9 +80,13 @@ public class View {
 
     private GridPane configGrid = new GridPane();
 
+    private Button applyButton = new Button("Anwenden");
+    private Button resetButton = new Button("Zurücksetzen");
+
     /**
      * Startet die Anwendung mit dem Startfenster.
      */
+
     public void start(Stage primaryStage) {
         stage = primaryStage;
         stage.setTitle("Outfit-Konfigurator");
@@ -253,13 +257,18 @@ public class View {
         TableColumn<Pieces, String> column6 = new TableColumn<>("Jahreszeit");
         column6.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getSeason();
-            return new ReadOnlyStringWrapper(String.join(", ", list));
+
+            String joined = String.join("\n", list);
+            return new ReadOnlyStringWrapper(joined);
         });
 
         TableColumn<Pieces, String> column7 = new TableColumn<>("Wetter");
         column7.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getWeather();
-            return new ReadOnlyStringWrapper(String.join(", ", list));
+
+            String joined = String.join("\n", list);
+            return new ReadOnlyStringWrapper(joined);
+
         });
 
         table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7);
@@ -303,8 +312,8 @@ public class View {
         weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
         configGrid.add(weatherBox, 1, 4);
 
-        Button applyButton = new Button("Anwenden");
-        Button resetButton = new Button("Zurücksetzen");
+        applyButton.setPrefWidth(100);
+        resetButton.setPrefWidth(100);
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
@@ -314,7 +323,6 @@ public class View {
         root.setBottom(null);
         root.setCenter(configGrid);
     }
-
     /**
      * Menüleiste oben mit Inventar- und Konfigurator-Button.
      */
@@ -448,5 +456,13 @@ public class View {
 
     public JFileChooser getFileChooser() {
         return fileChooser;
+    }
+
+    public Button getResetButton() {
+        return resetButton;
+    }
+
+    public Button getApplyButton() {
+        return applyButton;
     }
 }

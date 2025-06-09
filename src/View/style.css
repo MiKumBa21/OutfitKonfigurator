@@ -41,6 +41,16 @@
     -fx-background-color: hotpink;
     -fx-text-fill: white;
 }
+
+.table-cell {
+    -fx-alignment: center;
+}
+
+.table-view .scroll-bar {
+    -fx-opacity: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+=======
 .check-box {
 
 }
