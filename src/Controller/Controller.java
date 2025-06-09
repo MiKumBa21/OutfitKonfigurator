@@ -169,7 +169,7 @@ public class Controller {
             season.add("Frühling");
         }
         if (view.getSummerCheckBox().isSelected()) {
-            season.add("Sommer");
+            season.add("Sommer ");
         }
         if (view.getAutumnCheckBox().isSelected()) {
             season.add("Herbst");
