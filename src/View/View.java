@@ -75,6 +75,9 @@ public class View {
 
     private GridPane configGrid = new GridPane();
 
+    private Button applyButton = new Button("Anwenden");
+    private Button resetButton = new Button("Zurücksetzen");
+
     public void start(Stage primaryStage) {
         stage = primaryStage;
 
@@ -262,7 +265,7 @@ public class View {
         TableColumn<Pieces, String> column6 = new TableColumn<>("Jahreszeit");
         column6.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getSeason();
-            String joined = String.join(", ", list);
+            String joined = String.join("\n", list);
             return new ReadOnlyStringWrapper(joined);
         });
         column6.setMinWidth(150);
@@ -272,7 +275,7 @@ public class View {
         TableColumn<Pieces, String> column7 = new TableColumn<>("Wetter");
         column7.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getWeather();
-            String joined = String.join(", ", list);
+            String joined = String.join("\n", list);
             return new ReadOnlyStringWrapper(joined);
         });
         column7.setMinWidth(150);
@@ -326,8 +329,6 @@ public class View {
         configGrid.add(weatherLabel, 0, 4);
         configGrid.add(weatherBox, 1, 4);
 
-        Button applyButton = new Button("Anwenden");
-        Button resetButton = new Button("Zurücksetzen");
         applyButton.setPrefWidth(100);
         resetButton.setPrefWidth(100);
 
@@ -339,7 +340,6 @@ public class View {
         root.setBottom(null);
         root.setCenter(configGrid);
     }
-
 
     public HBox menuBar() {
 
@@ -469,7 +469,13 @@ public class View {
 
     public JFileChooser getFileChooser() {
         return fileChooser;
+    }
 
+    public Button getResetButton() {
+        return resetButton;
+    }
 
+    public Button getApplyButton() {
+        return applyButton;
     }
 }

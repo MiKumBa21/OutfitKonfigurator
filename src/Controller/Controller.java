@@ -66,8 +66,45 @@ public class Controller {
         });
 
         //Das Bearbeiten der einzelnen Elemente
-        view.getInventoryTable().setOnMouseClicked(event -> {
-            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
+//        view.getInventoryTable().setOnMouseClicked(event -> {
+//            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
+//        });
+
+        view.getResetButton().setOnAction(event -> {
+            clearChoise();
+        });
+
+        view.getApplyButton().setOnAction(event -> {
+            String style = view.getStyleField().getText();
+            String color = view.getColorField().getText();
+            ArrayList<String> season = new ArrayList<>();
+            ArrayList<String> weather = new ArrayList<>();
+
+            if (view.getSunnyCheckBox().isSelected()) {
+                weather.add("Sonnig");
+            }
+            if (view.getRainCheckBox().isSelected()) {
+                weather.add("Regen");
+            }
+            if (view.getSnowyCheckBox().isSelected()) {
+                weather.add("Schnee");
+            }
+            if (view.getWindyCheckBox().isSelected()) {
+                weather.add("Windig");
+            }
+
+            if (view.getWindyCheckBox().isSelected()) {
+                season.add("Winter");
+            }
+            if (view.getSpringCheckBox().isSelected()) {
+                season.add("Frühling");
+            }
+            if (view.getSummerCheckBox().isSelected()) {
+                season.add("Sommer");
+            }
+            if (view.getAutumnCheckBox().isSelected()) {
+                season.add("Herbst");
+            }
         });
 
     }
