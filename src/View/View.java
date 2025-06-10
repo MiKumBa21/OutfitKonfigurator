@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -84,11 +83,11 @@ public class View {
     private Button backButton = new Button("Zurück");
 
     private GridPane configGrid = new GridPane();
-    private ImageView shoesImage = new ImageView(new Image("File:./images/nix.jpg"));
-    private ImageView bottomImage = new ImageView(new Image("File:./images/nix.jpg"));
-    private ImageView topImage = new ImageView(new Image("File:./images/nix.jpg"));
-    private ImageView headImage = new ImageView(new Image("File:./images/nix.jpg"));
-    private ImageView accessoriesImage = new ImageView(new Image("File:./images/nix.jpg"));
+    private ImageView shoesImage = new ImageView();
+    private ImageView bottomImage = new ImageView();
+    private ImageView topImage = new ImageView();
+    private ImageView headImage = new ImageView();
+    private ImageView accessoriesImage = new ImageView();
 
     private Button applyButton = new Button("Anwenden");
     private Button resetButton = new Button("Zurücksetzen");
