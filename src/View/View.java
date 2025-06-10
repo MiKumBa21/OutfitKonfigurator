@@ -67,16 +67,16 @@ public class View {
 
     private HBox seasonsBox = new HBox();
     private CheckBox winterCheckBox = new CheckBox("⛄ Winter");
-    private CheckBox springCheckBox = new CheckBox("🌷 Frühling");
-    private CheckBox summerCheckBox = new CheckBox("🌞 Sommer");
-    private CheckBox autumnCheckBox = new CheckBox("🍂 Herbst");
+    private CheckBox springCheckBox = new CheckBox("\uD83C\uDF37 Frühling");
+    private CheckBox summerCheckBox = new CheckBox("\uD83C\uDF1E Sommer");
+    private CheckBox autumnCheckBox = new CheckBox("\uD83C\uDF41 Herbst");
 
     private ChoiceBox<String> typeChoice = new ChoiceBox<>();
 
     private HBox weatherBox = new HBox();
     private CheckBox sunnyCheckBox = new CheckBox("☀ Sonnig");
     private CheckBox rainCheckBox = new CheckBox("🌧 Regen");
-    private CheckBox snowyCheckBox = new CheckBox("❆ Schnee");
+    private CheckBox snowyCheckBox = new CheckBox("⛄ Schnee");
     private CheckBox windyCheckBox = new CheckBox("༄ Windig");
 
     private Button imageButton = new Button("Bild hinzufügen");
@@ -84,11 +84,11 @@ public class View {
     private Button backButton = new Button("Zurück");
 
     private GridPane configGrid = new GridPane();
-    private ImageView shoesImage = new ImageView();
-    private ImageView bottomImage = new ImageView();
-    private ImageView topImage = new ImageView();
-    private ImageView headImage = new ImageView();
-    private ImageView accessoriesImage = new ImageView();
+    private ImageView shoesImage = new ImageView(new Image("File:./images/nix.jpg"));
+    private ImageView bottomImage = new ImageView(new Image("File:./images/nix.jpg"));
+    private ImageView topImage = new ImageView(new Image("File:./images/nix.jpg"));
+    private ImageView headImage = new ImageView(new Image("File:./images/nix.jpg"));
+    private ImageView accessoriesImage = new ImageView(new Image("File:./images/nix.jpg"));
 
     private Button applyButton = new Button("Anwenden");
     private Button resetButton = new Button("Zurücksetzen");
