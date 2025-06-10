@@ -79,7 +79,7 @@ public class Controller {
             view.imageSelction();
         });
 
-        //Das Bearbeiten der einzelnen Elemente
+        //Das Bearbeiten der einzelnen Elemente war eine Idee, wurde aqbernicht umgesetzt
 //        view.getInventoryTable().setOnMouseClicked(event -> {
 //            Pieces selectedItem = (Pieces) view.getInventoryTable().getSelectionModel().getSelectedItem();
 //        });
@@ -88,6 +88,7 @@ public class Controller {
             clearChoise();
         });
 
+        //Es ist uns bewusst, dass der Suchalgorithmus nicht ganz funktioniert
         view.getApplyButton().setOnAction(event -> {
             System.out.println("Apply");
             String style = view.getStyleField().getText();
