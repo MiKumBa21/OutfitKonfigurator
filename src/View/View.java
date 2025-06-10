@@ -64,14 +64,14 @@ public class View {
     private CheckBox winterCheckBox = new CheckBox("⛄ Winter");
     private CheckBox springCheckBox = new CheckBox("🌷 Frühling");
     private CheckBox summerCheckBox = new CheckBox("🌞 Sommer");
-    private CheckBox autumnCheckBox = new CheckBox("🍂 Herbst");
+    private CheckBox autumnCheckBox = new CheckBox("Herbst");
 
     private ChoiceBox<String> typeChoice = new ChoiceBox<>();
 
     private HBox weatherBox = new HBox();
     private CheckBox sunnyCheckBox = new CheckBox("☀ Sonnig");
     private CheckBox rainCheckBox = new CheckBox("🌧 Regen");
-    private CheckBox snowyCheckBox = new CheckBox("❆ Schnee");
+    private CheckBox snowyCheckBox = new CheckBox("Schnee");
     private CheckBox windyCheckBox = new CheckBox("༄ Windig");
 
     private Button imageButton = new Button("Bild hinzufügen");
