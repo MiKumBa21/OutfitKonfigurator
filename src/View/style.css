@@ -30,12 +30,9 @@
     -fx-border-radius: 6;
 }
 
-
 .table-row-cell:selected:focused {
     -fx-background-color: #66bfff;
-
 }
-
 
 .button.active {
     -fx-background-color: hotpink;
@@ -51,6 +48,8 @@
     -fx-max-width: 0;
     -fx-max-height: 0;
 }
-.check-box {
 
+#outfitPreview {
+    -fx-border-color: #ddd;
+    -fx-border-radius: 5;
 }

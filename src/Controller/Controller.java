@@ -33,9 +33,9 @@ public class Controller {
 
         //Für Alertbox und speichern von Daten
         stage.setOnCloseRequest(event -> {
-            datenbank.itemsSpeichern();
             event.consume();
             view.closeAlert(stage);
+            datenbank.itemsSpeichern();
         });
 
         startDatenbank();
@@ -57,11 +57,13 @@ public class Controller {
 
         view.getBackButton().setOnAction(event -> {
             view.getAddStage().close();
+            clearChoise();
         });
 
         view.getSaveButton().setOnAction(event -> {
             saveNewPiece();
             view.getAddStage().close();
+            clearChoise();
             loadTable();
         });
 
@@ -87,9 +89,10 @@ public class Controller {
         });
 
         view.getApplyButton().setOnAction(event -> {
+            System.out.println("Apply");
             String style = view.getStyleField().getText();
             String color = view.getColorField().getText();
-            ArrayList<String> season = new ArrayList<>();
+            ArrayList<String> seasons = new ArrayList<>();
             ArrayList<String> weather = new ArrayList<>();
 
             if (view.getSunnyCheckBox().isSelected()) {
@@ -105,19 +108,46 @@ public class Controller {
                 weather.add("Windig");
             }
 
-            if (view.getWindyCheckBox().isSelected()) {
-                season.add("Winter");
+            if (view.getWinterCheckBox().isSelected()) {
+                seasons.add("Winter");
             }
             if (view.getSpringCheckBox().isSelected()) {
-                season.add("Frühling");
+                seasons.add("Frühling");
             }
             if (view.getSummerCheckBox().isSelected()) {
-                season.add("Sommer");
+                seasons.add("Sommer");
             }
             if (view.getAutumnCheckBox().isSelected()) {
-                season.add("Herbst");
+                seasons.add("Herbst");
+            }
+            ArrayList<Pieces> configOutfit = model.suchAlg(style, color, seasons, weather);
+
+            view.getShoesImage().setImage(null);
+            view.getBottomImage().setImage(null);
+            view.getTopImage().setImage(null);
+            view.getHeadImage().setImage(null);
+            view.getAccessoriesImage().setImage(null);
+
+            for (int i = 0; i < configOutfit.size(); i++) {
+                if (configOutfit.get(i).getType().equals("Schuhe")) {
+                    view.getShoesImage().setImage(new Image("File:" + configOutfit.get(i).getImageSource()));
+                }
+                if (configOutfit.get(i).getType().equals("Unterteil")) {
+                    view.getBottomImage().setImage(new Image("File:" + configOutfit.get(i).getImageSource()));
+                }
+                if (configOutfit.get(i).getType().equals("Oberteil")) {
+                    view.getTopImage().setImage(new Image("File:" + configOutfit.get(i).getImageSource()));
+                }
+                if (configOutfit.get(i).getType().equals("Kopfbedekung")) {
+                    view.getHeadImage().setImage(new Image(configOutfit.get(i).getImageSource()));
+                }
+                if (configOutfit.get(i).getType().equals("Accessories")) {
+                    view.getAccessoriesImage().setImage(new Image("File:" + configOutfit.get(i).getImageSource()));
+
+                }
             }
         });
+
     }
 
     /**
@@ -187,9 +217,9 @@ public class Controller {
 
         ArrayList<String> weather = new ArrayList<>();
         ArrayList<String> season = new ArrayList<>();
-        if (view.getFileChooser().getSelectedFile() != null) {
-            imageSource = view.getFileChooser().getSelectedFile().getAbsolutePath();
-            System.out.println(view.getFileChooser().getSelectedFile().getAbsolutePath());
+        if (view.getLastFile() != null) {
+            imageSource = view.getLastFile();
+            System.out.println(view.getLastFile());
         } else {
             imageSource = "";
         }
@@ -240,6 +270,6 @@ public class Controller {
         view.getSunnyCheckBox().setSelected(false);
         view.getWindyCheckBox().setSelected(false);
         view.getSnowyCheckBox().setSelected(false);
-        view.getFileChooser().setSelectedFile(null);
+        view.setLastFile("");
     }
 }

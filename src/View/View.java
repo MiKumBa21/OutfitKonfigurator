@@ -2,6 +2,7 @@ package View;
 
 import Model.Pieces;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,14 +16,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -50,11 +54,12 @@ public class View {
     private Button addButton = new Button("Hinzufügen");
     private Button delButton = new Button("Löschen");
 
-    private static JFileChooser fileChooser = new JFileChooser();
+    private static FileChooser fileChooser = new FileChooser();
+    private String lastFile ;
 
     private Stage addStage = new Stage();
     private GridPane addGrid = new GridPane();
-    private Scene addScene = new Scene(addGrid, 500, 500);
+    private Scene addScene = new Scene(addGrid, 600, 600);
 
     private TextField nameField = new TextField();
     private TextField colorField = new TextField();
@@ -79,6 +84,11 @@ public class View {
     private Button backButton = new Button("Zurück");
 
     private GridPane configGrid = new GridPane();
+    private ImageView shoesImage = new ImageView();
+    private ImageView bottomImage = new ImageView();
+    private ImageView topImage = new ImageView();
+    private ImageView headImage = new ImageView();
+    private ImageView accessoriesImage = new ImageView();
 
     private Button applyButton = new Button("Anwenden");
     private Button resetButton = new Button("Zurücksetzen");
@@ -187,13 +197,16 @@ public class View {
 
         Label addLabel = new Label("Kleidungsstück hinzufügen");
         addLabel.setId("addSceneLabel");
+        addLabel.setAlignment(Pos.CENTER);
         addLabel.setFont(Font.font("Calibri-Light", FontWeight.BOLD, 25));
-        addGrid.add(addLabel, 0, 0);
+        addLabel.setMaxWidth(Double.MAX_VALUE);
+        addGrid.add(addLabel, 0, 0, 3, 1);
 
         GridPane inputGrid = new GridPane();
         inputGrid.setAlignment(Pos.CENTER);
         inputGrid.setHgap(10);
         inputGrid.setVgap(10);
+        inputGrid.setPadding(new Insets(10));
 
         inputGrid.add(new Label("Name: "), 0, 0);
         inputGrid.add(nameField, 2, 0);
@@ -205,19 +218,24 @@ public class View {
         inputGrid.add(styleField, 2, 4);
 
         inputGrid.add(new Label("Type: "), 0, 6);
-        typeChoice.getItems().addAll("Schuhe", "Unterteil", "Oberteil", "Kopfbedekung", "Accessories");
+        typeChoice.getItems().addAll("Schuhe", "Unterteil", "Oberteil", "Kopfbedeckung", "Accessories");
         inputGrid.add(typeChoice, 2, 6);
+        typeChoice.setMaxWidth(150);
 
         inputGrid.add(new Label("Jahreszeit: "), 0, 10);
         seasonsBox.getChildren().addAll(winterCheckBox, springCheckBox, summerCheckBox, autumnCheckBox);
         inputGrid.add(seasonsBox, 2, 10);
+        seasonsBox.setSpacing(10);
 
         inputGrid.add(new Label("Wetter: "), 0, 12);
         weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
         inputGrid.add(weatherBox, 2, 12);
+        weatherBox.setSpacing(10);
 
         inputGrid.add(imageButton, 0, 16, 3, 1);
         addGrid.add(inputGrid, 0, 3);
+        imageButton.setMaxWidth(Double.MAX_VALUE);
+        imageButton.setAlignment(Pos.CENTER);
 
         HBox buttonBox2 = new HBox();
         buttonBox2.setAlignment(Pos.CENTER);
@@ -241,35 +259,46 @@ public class View {
 
         TableColumn<Pieces, ImageView> column1 = new TableColumn<>("Bild");
         column1.setCellValueFactory(new PropertyValueFactory<>("imageView"));
+        column1.setMaxWidth(150);
+        column1.setMinWidth(150);
 
         TableColumn<Pieces, String> column2 = new TableColumn<>("Name");
         column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+        column2.setMaxWidth(150);
+        column2.setMinWidth(150);
 
         TableColumn<Pieces, String> column3 = new TableColumn<>("Farbe");
         column3.setCellValueFactory(new PropertyValueFactory<>("color"));
+        column3.setMaxWidth(150);
+        column3.setMinWidth(150);
 
         TableColumn<Pieces, String> column4 = new TableColumn<>("Stil");
         column4.setCellValueFactory(new PropertyValueFactory<>("style"));
+        column4.setMaxWidth(150);
+        column4.setMinWidth(150);
 
         TableColumn<Pieces, String> column5 = new TableColumn<>("Type");
         column5.setCellValueFactory(new PropertyValueFactory<>("type"));
+        column5.setMaxWidth(150);
+        column5.setMinWidth(150);
 
         TableColumn<Pieces, String> column6 = new TableColumn<>("Jahreszeit");
         column6.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getSeason();
-
             String joined = String.join("\n", list);
             return new ReadOnlyStringWrapper(joined);
         });
+        column6.setMaxWidth(150);
+        column6.setMinWidth(150);
 
         TableColumn<Pieces, String> column7 = new TableColumn<>("Wetter");
         column7.setCellValueFactory(data -> {
             ArrayList<String> list = data.getValue().getWeather();
-
             String joined = String.join("\n", list);
             return new ReadOnlyStringWrapper(joined);
-
         });
+        column7.setMaxWidth(150);
+        column7.setMinWidth(150);
 
         table.getColumns().addAll(column1, column2, column3, column4, column5, column6, column7);
         table.setFixedCellSize(100);
@@ -297,6 +326,8 @@ public class View {
         Label configLabel = new Label("Outfit-Konfigurator");
         configLabel.setFont(Font.font("Calibri-Light", FontWeight.BOLD, 30));
         configGrid.add(configLabel, 0, 0, 2, 1);
+        configLabel.setAlignment(Pos.CENTER);
+        configLabel.setMaxWidth(Double.MAX_VALUE);
 
         configGrid.add(new Label("Style:"), 0, 1);
         configGrid.add(styleField, 1, 1);
@@ -307,22 +338,66 @@ public class View {
         configGrid.add(new Label("Jahreszeit:"), 0, 3);
         seasonsBox.getChildren().addAll(winterCheckBox, springCheckBox, summerCheckBox, autumnCheckBox);
         configGrid.add(seasonsBox, 1, 3);
+        seasonsBox.setSpacing(10);
 
         configGrid.add(new Label("Wetter:"), 0, 4);
         weatherBox.getChildren().addAll(sunnyCheckBox, rainCheckBox, snowyCheckBox, windyCheckBox);
         configGrid.add(weatherBox, 1, 4);
+        weatherBox.setSpacing(10);
 
-        applyButton.setPrefWidth(100);
-        resetButton.setPrefWidth(100);
+        applyButton.setPrefWidth(200);
+        resetButton.setPrefWidth(200);
+
+
+
+        configGrid.add(createOutfitPreview(), 1, 6);
 
         HBox buttonBox = new HBox(20);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.getChildren().addAll(applyButton, resetButton);
         configGrid.add(buttonBox, 0, 5, 2, 1);
 
+
         root.setBottom(null);
         root.setCenter(configGrid);
     }
+
+    public VBox createOutfitPreview() {
+        VBox outfitPreview = new VBox(10);
+        outfitPreview.setId("outfitPreview");
+        outfitPreview.setAlignment(Pos.CENTER);
+        outfitPreview.setPadding(new Insets(15));
+
+        headImage.setFitWidth(60);
+        headImage.setPreserveRatio(true);
+        HBox headRow = new HBox(10, new Label("Kopf:"), headImage);
+        headRow.setAlignment(Pos.CENTER);
+
+        topImage.setFitWidth(60);
+        topImage.setPreserveRatio(true);
+        HBox topRow = new HBox(10, new Label("Oberteil:"), topImage);
+        topRow.setAlignment(Pos.CENTER);
+
+        bottomImage.setFitWidth(60);
+        bottomImage.setPreserveRatio(true);
+        HBox bottomRow = new HBox(10, new Label("Unterteil:"), bottomImage);
+        bottomRow.setAlignment(Pos.CENTER);
+
+        shoesImage.setFitWidth(60);
+        shoesImage.setPreserveRatio(true);
+        HBox shoesRow = new HBox(10, new Label("Schuhe:"), shoesImage);
+        shoesRow.setAlignment(Pos.CENTER);
+
+        accessoriesImage.setFitWidth(60);
+        accessoriesImage.setPreserveRatio(true);
+        HBox accessoriesRow = new HBox(10, new Label("Accessoires:"), accessoriesImage);
+        accessoriesRow.setAlignment(Pos.CENTER);
+
+        outfitPreview.getChildren().addAll(new Label("Aktuelles Outfit:"), headRow, topRow, bottomRow, shoesRow, accessoriesRow);
+
+        return outfitPreview;
+    }
+
     /**
      * Menüleiste oben mit Inventar- und Konfigurator-Button.
      */
@@ -339,22 +414,14 @@ public class View {
      * Öffnet einen Dateiauswahldialog zum Hochladen von Bildern.
      */
     public void imageSelction() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        fileChooser.setTitle("Bild auswählen");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Bilddateien", "jpg", "jpeg", "png", "gif"));
+        fileChooser.setInitialDirectory(new File("C:\\Users\\matth\\Documents\\Schule"));
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            lastFile = file.getAbsolutePath();
         }
-
-        SwingUtilities.invokeLater(() -> {
-            fileChooser.setDialogTitle("Bild auswählen");
-            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
-                    "Bilddateien", "jpg", "jpeg", "png", "bmp", "gif"));
-
-            JDialog dialog = new JDialog();
-            dialog.setAlwaysOnTop(true);
-            fileChooser.showOpenDialog(dialog);
-            dialog.dispose();
-        });
     }
 
     // Getter-Methoden für Zugriff von außen
@@ -454,15 +521,39 @@ public class View {
         return inventoryTable;
     }
 
-    public JFileChooser getFileChooser() {
-        return fileChooser;
-    }
-
     public Button getResetButton() {
         return resetButton;
     }
 
     public Button getApplyButton() {
         return applyButton;
+    }
+
+    public String getLastFile() {
+        return lastFile;
+    }
+
+    public void setLastFile(String lastFile) {
+        this.lastFile = lastFile;
+    }
+
+    public ImageView getAccessoriesImage() {
+        return accessoriesImage;
+    }
+
+    public ImageView getHeadImage() {
+        return headImage;
+    }
+
+    public ImageView getTopImage() {
+        return topImage;
+    }
+
+    public ImageView getBottomImage() {
+        return bottomImage;
+    }
+
+    public ImageView getShoesImage() {
+        return shoesImage;
     }
 }

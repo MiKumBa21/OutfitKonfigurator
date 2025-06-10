@@ -27,7 +27,7 @@ public class Pieces {
 
     public ImageView getImageView() {
         ImageView view = new ImageView(new Image("File:" + getImageSource()));
-        view.setFitWidth(150);
+        view.setFitHeight(100);
         view.setPreserveRatio(true);
      return view;
     }
